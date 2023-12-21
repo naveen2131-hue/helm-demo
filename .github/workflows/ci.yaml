@@ -21,6 +21,10 @@ jobs:
           sudo mv terrascan /usr/local/bin/ &&
           rm terrascan.tar.gz
 
+      -name: Check Helm Version
+        run: |
+          helm version
+
       - name: Helm Template and Scanning
         run: |
           helm template charts/k8tz/ --output-dir "./charts/output"
