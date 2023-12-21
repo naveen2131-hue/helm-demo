@@ -29,8 +29,6 @@ jobs:
 
       - name: Helm Template and Scanning
         run: |
-          cd charts/k8tz/
-          for chart in charts/k8tz/*; do
            helm template  charts/k8tz/ --output-dir "./charts/output"
            terrascan scan -i k8s 
           done
