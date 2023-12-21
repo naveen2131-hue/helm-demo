@@ -21,6 +21,12 @@ jobs:
           sudo mv terrascan /usr/local/bin/ &&
           rm terrascan.tar.gz
 
+      - name: Install Helm
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod +x get_helm.sh
+          ./get_helm.sh    
+
       - name: Helm Template and Scanning
         run: |
           cd charts 
