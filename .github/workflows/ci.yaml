@@ -3,7 +3,7 @@ name: ci.yml
 on:
   pull_request:
   push:
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
   Terrascan:
@@ -25,10 +25,9 @@ jobs:
         run: |
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
           chmod +x get_helm.sh
-          ./get_helm.sh    
+          ./get_helm.sh
 
       - name: Helm Template and Scanning
         run: |
-           helm template  charts/k8tz/ --output-dir "./charts/output"
-           terrascan scan -i k8s 
-          done
+          helm template charts/k8tz/ --output-dir "./charts/output"
+          terrascan scan -i k8s
