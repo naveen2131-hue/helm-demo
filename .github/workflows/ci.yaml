@@ -14,17 +14,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Install Terrascan
-        run: |
-          curl -L "https://github.com/tenable/terrascan/releases/download/v1.15.2/terrascan_1.15.2_Linux_x86_64.tar.gz" > terrascan.tar.gz &&
-          tar -xf terrascan.tar.gz terrascan &&
-          sudo mv terrascan /usr/local/bin/ &&
-          rm terrascan.tar.gz
-
-      -name: Check Helm Version
-        run: |
-          helm version
-
       - name: Helm Template and Scanning
         run: |
           helm template charts/k8tz/ --output-dir "./charts/output"
