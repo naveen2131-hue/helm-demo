@@ -1,9 +1,5 @@
 name: ci.yml
-
-on:
-  pull_request:
-    push:
-      workflow_dispatch:
+on: [pull_request, push, workflow_dispatch]
 
 jobs:
   Terrascan:
