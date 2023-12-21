@@ -25,6 +25,6 @@ jobs:
         run: |
           cd charts 
           for chart in adaptive/*; do
-            helm template adaptive --output-dir "./adaptive/output" --values adaptive/**-values.yaml
+            helm template charts/k8tz --output-dir "./adaptive/output" --values charts/k8tz/**-values.yaml
             terrascan scan -i k8s 
           done
