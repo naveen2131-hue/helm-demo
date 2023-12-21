@@ -1,0 +1,30 @@
+name: ci.yml
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+jobs:
+  Terrascan:
+    name: Terrascan Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Terrascan
+        run: |
+          curl -L "https://github.com/tenable/terrascan/releases/download/v1.15.2/terrascan_1.15.2_Linux_x86_64.tar.gz" > terrascan.tar.gz &&
+          tar -xf terrascan.tar.gz terrascan &&
+          sudo mv terrascan /usr/local/bin/ &&
+          rm terrascan.tar.gz
+
+      - name: Helm Template and Scanning
+        run: |
+          cd charts 
+          for chart in adaptive/*; do
+            helm template adaptive --output-dir "./adaptive/output" --values adaptive/**-values.yaml
+            terrascan scan -i k8s 
+          done
